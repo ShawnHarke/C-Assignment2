@@ -66,25 +66,25 @@ namespace Reservations
         }
 
 
-        public bool IsValidData()
+        public bool IsValidData() // Checks if user input Arival and departure input data 
         {
             bool success = true;
             string errorMessage = "";
 
-            // Validate the Arrival date text box
-            errorMessage += IsPresent(txtArrivalDate.Text, "Arrival date");
+            
+            errorMessage += IsPresent(txtArrivalDate.Text, "Arrival date"); //Checks to see if arrival date is present
+            errorMessage += IsPresent(txtDepartureDate.Text, "Departure date"); //Checks to see if departure date is present
+            errorMessage += IsDateTime(txtArrivalDate.Text, "Arrival Date"); //Checks to see if Arrival date is a valid date
+            errorMessage += IsDateTime(txtDepartureDate.Text, "Departure Date"); // Checks to see if Departure date is a valid date
 
-            // Validate the Departure date text box
-            errorMessage += IsPresent(txtDepartureDate.Text, "Departure date");
-            errorMessage += IsDateTime(txtArrivalDate.Text, "Arrival Date");
-            errorMessage += IsDateTime(txtDepartureDate.Text, "Departure Date");
+            DateTime minDate = DateTime.Now.Date; // defines earliest date as the current day
+            DateTime maxDate = DateTime.Now.AddYears(5).Date; // defines latest date as five years from today
+            
+            errorMessage += IsWithinDateRange(txtArrivalDate.Text, "Arrival Date", minDate, maxDate); // Makes sure arrival date is within the min and max date
+            errorMessage += IsWithinDateRange(txtDepartureDate.Text, "Departure Date", minDate, maxDate); // Makes sure the departure date is within the min and max
+            errorMessage += IsLaterDate(txtArrivalDate.Text, "Arrival Date", txtDepartureDate.Text, "Departure Date"); // Makes sure Arrival date is before departure date
 
-            DateTime minDate = DateTime.Now.Date;
-            DateTime maxDate = DateTime.Now.AddYears(5).Date;
-            errorMessage += IsWithinDateRange(txtArrivalDate.Text, "Arrival Date", minDate, maxDate);
-            errorMessage += IsWithinDateRange(txtDepartureDate.Text, "Departure Date", minDate, maxDate);
-            errorMessage += IsLaterDate(txtArrivalDate.Text, "Arrival Date", txtDepartureDate.Text, "Departure Date");
-
+            //If an error was made show the user
             if (errorMessage != "")
             {
                 success = false; 
@@ -93,6 +93,7 @@ namespace Reservations
             return success;
         }
 
+        //Checks to make sure input data is present
         public string IsPresent(string value, string name)
         {
             string msg = "";
@@ -103,6 +104,7 @@ namespace Reservations
             return msg;
         }
 
+        //Makes sure input data can be converted to a date time
         public string IsDateTime(string value, string name)
         {
             string msg = "";
@@ -117,6 +119,7 @@ namespace Reservations
         }
 
 
+        // Makes sure enter data is between the min and max dates 
         public string IsWithinDateRange(string value, string name,
             DateTime min, DateTime max)
         {
@@ -131,6 +134,7 @@ namespace Reservations
             return msg;
         }
 
+        //Makes sure departure date is after arrival date
         public string IsLaterDate(string earlyValue, string earlyName,
             string laterValue, string laterName)
         {
@@ -146,9 +150,11 @@ namespace Reservations
             return msg;
         }
 
+        //Once exit button is clicked the program closes
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
     }
+
 }
