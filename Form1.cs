@@ -135,16 +135,18 @@ namespace Reservations
         }
 
         //Makes sure departure date is after arrival date
-        public string IsLaterDate(string earlyValue, string earlyName,
-            string laterValue, string laterName)
+        public string IsLaterDate(string ArrivalValue, string Arrival,
+                          string DepartureValue, string Departure)
         {
             string msg = "";
             DateTime earlyDate, laterDate;
-            if (DateTime.TryParse(earlyValue, out earlyDate) && DateTime.TryParse(laterValue, out laterDate))
+
+            if (DateTime.TryParse(ArrivalValue, out earlyDate) &&
+                DateTime.TryParse(DepartureValue, out laterDate))
             {
                 if (laterDate <= earlyDate)
                 {
-                    msg = laterName + " must be after " + earlyName;
+                    msg = Departure + " must be after " + Arrival;
                 }
             }
             return msg;
@@ -158,4 +160,5 @@ namespace Reservations
     }
 
 }
+
 
