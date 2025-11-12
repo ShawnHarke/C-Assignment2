@@ -112,7 +112,7 @@ namespace Reservations
             DateTime DateInput;
             if (!DateTime.TryParse(value, out DateInput))
             {
-                msg = "must enter valid Date";
+                msg = name + "must enter valid Date \n";
             }
             return msg;
 
@@ -128,7 +128,7 @@ namespace Reservations
             if (DateTime.TryParse(value, out DateInput))
             {
                 if (DateInput < min || DateInput > max) 
-                msg = " must be between " + min.ToShortDateString() +
+                msg = name + ": must be between " + min.ToShortDateString() +
                 " and " + max.ToShortDateString();               
             }
             return msg;
@@ -158,3 +158,4 @@ namespace Reservations
     }
 
 }
+
