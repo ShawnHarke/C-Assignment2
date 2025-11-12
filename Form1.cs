@@ -60,8 +60,8 @@ namespace Reservations
                                                             // and nightsStayed and stores it in a variable called avgPrice
 
                 txtNights.Text = nightsStayed.ToString(); // assigns value of nightStayed to the number of nights text box
-                txtTotalPrice.Text = totalPrice.ToString(); // assigns value of totalPrice to the total price text box
-                txtAvgPrice.Text = avgPrice.ToString(); // assigns value of avgPrice to the avg price per night text box
+                txtTotalPrice.Text = totalPrice.ToString("c"); // assigns value of totalPrice to the total price text box
+                txtAvgPrice.Text = avgPrice.ToString("c"); // assigns value of avgPrice to the avg price per night text box
             }
         }
 
@@ -160,5 +160,6 @@ namespace Reservations
     }
 
 }
+
 
 
